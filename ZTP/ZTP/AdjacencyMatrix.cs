@@ -3,10 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using ZTP.Interfaces;
 
 namespace ZTP
 {
-    public class AdjacencyMatrix
+    public class AdjacencyMatrix : IAdjacencyMatrix
     {
         public int[,] CreateAdjMatrix(DotGraph<int> Graph)
         {
