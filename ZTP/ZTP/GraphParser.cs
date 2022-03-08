@@ -5,10 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using ZTP.Interfaces;
 
 namespace ZTP
 {
-    public class GraphParser
+    public class GraphParser : IParser
     {
         public DotGraph<int> Run(string path)
         {
