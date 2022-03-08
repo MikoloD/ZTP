@@ -9,7 +9,6 @@ namespace ZTP
     {
 
         private readonly int NO_PARENT = -1;
-        private Dictionary<int, int> NodeIDs { get; set; }
         public DijkstraResult[] AlghoritmResult { get; set; }
 
         // funkcja implementująca algorytm dijkstry kozystającego z macierzy odległości
