@@ -1,6 +1,7 @@
 ﻿using Graphviz4Net.Dot;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using ZTP.Interfaces;
 
 namespace ZTP
 {
@@ -12,13 +13,13 @@ namespace ZTP
             int startNode = 0;
 
             var serviceProvider = new ServiceCollection()
-                .AddSingleton<GraphParser>()
-                .AddSingleton<AdjacencyMatrix>()
+                .AddSingleton<IParser,GraphParser>()
+                .AddSingleton<IAdjacencyMatrix,AdjacencyMatrix>()
                 .AddSingleton<IDijkstra,Dijkstra>()
                 .BuildServiceProvider();
 
-            DotGraph<int> Graf = serviceProvider.GetService<GraphParser>().Run(path);
-            AdjacencyMatrix AdjacencyMatrix = serviceProvider.GetService<AdjacencyMatrix>();
+            DotGraph<int> Graf = serviceProvider.GetService<IParser>().Run(path);
+            IAdjacencyMatrix AdjacencyMatrix = serviceProvider.GetService<IAdjacencyMatrix>();
             IDijkstra Dijkstra = serviceProvider.GetService<IDijkstra>();
             Dijkstra.Run(AdjacencyMatrix.CreateAdjMatrix(Graf),startNode);
             foreach (var item in Dijkstra.AlghoritmResult)
