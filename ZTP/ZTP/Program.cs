@@ -21,16 +21,18 @@ namespace ZTP
             DotGraph<int> Graf = serviceProvider.GetService<IParser>().Run(path);
             IAdjacencyMatrix AdjacencyMatrix = serviceProvider.GetService<IAdjacencyMatrix>();
             IDijkstra Dijkstra = serviceProvider.GetService<IDijkstra>();
-            Dijkstra.Run(AdjacencyMatrix.CreateAdjMatrix(Graf),startNode);
-            foreach (var item in Dijkstra.AlghoritmResult)
-            {
-                Console.Write(item.SourceNodeId+" "+item.TargetNodeId+" "+item.Value);
-                foreach (var elem in item.Path)
-                {
-                    Console.Write(" "+elem);
-                }
-                Console.WriteLine();
-            }
+
+            //Dijkstra.Run(AdjacencyMatrix.CreateAdjMatrix(Graf),startNode);
+
+            //foreach (var item in Dijkstra.AlghoritmResult)
+            //{
+            //    Console.Write(item.SourceNodeId+" "+item.TargetNodeId+" "+item.Value);
+            //    foreach (var elem in item.Path)
+            //    {
+            //        Console.Write(" "+elem);
+            //    }
+            //    Console.WriteLine();
+            //}
         }
     }
 }

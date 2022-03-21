@@ -13,19 +13,19 @@ namespace ZTP
             _dijkstra = dijkstra;
         }
 
-        public Path Run()
-        {
-            Path path = new Path
-            {
-                Value = 0,
-                Nodes = new int[dijkstraResults.Length]
-            };
-            while(dijkstraResults.Length > 0)
-            {
-                Path result = FindNearest(dijkstraResults);
-                path.Value += result.Value;
+        //public Path Run()
+        //{
+        //    Path path = new Path
+        //    {
+        //        Value = 0,
+        //        Nodes = new int[dijkstraResults.Length]
+        //    };
+        //    while(dijkstraResults.Length > 0)
+        //    {
+        //        Path result = FindNearest(dijkstraResults);
+        //        path.Value += result.Value;
 
-            }
-        }
+        //    }
+        //}
     }
 }
