@@ -4,9 +4,9 @@ using System.Text;
 
 namespace ZTP
 {
-    class Path
+    public class Path
     {
         public int[] Nodes { get; set; }
-        public int Value { get; set; }
+        public long Value { get; set; }
     }
 }
