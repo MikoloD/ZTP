@@ -12,15 +12,18 @@ namespace ZTP
             string path = @"Data\graphDuzy.dt";
             int startNode = 0;
 
-            var serviceProvider = new ServiceCollection()
-                .AddSingleton<IParser,GraphParser>()
-                .AddSingleton<IAdjacencyMatrix,AdjacencyMatrix>()
-                .AddSingleton<IDijkstra,Dijkstra>()
-                .BuildServiceProvider();
-
+            DIBuilder DIProvider  = new DIBuilder();
+            var serviceProvider = DIProvider.CoreServices;
             DotGraph<int> Graf = serviceProvider.GetService<IParser>().Run(path);
-            IAdjacencyMatrix AdjacencyMatrix = serviceProvider.GetService<IAdjacencyMatrix>();
-            IDijkstra Dijkstra = serviceProvider.GetService<IDijkstra>();
+            ITSP TravelingSalesmanProblem = serviceProvider.GetService<ITSP>();
+            Path result = TravelingSalesmanProblem.Run(startNode,Graf);
+            foreach (var item in result.Nodes)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine("Wartość: "+ result.Value);
+            //IAdjacencyMatrix AdjacencyMatrix = serviceProvider.GetService<IAdjacencyMatrix>();
+            //IDijkstra Dijkstra = serviceProvider.GetService<IDijkstra>();
 
             //Dijkstra.Run(AdjacencyMatrix.CreateAdjMatrix(Graf),startNode);
 
