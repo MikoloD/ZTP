@@ -8,7 +8,6 @@ namespace ZTP
 {
     public class DIBuilder
     {
-        public ServiceProvider CoreServices { get; set; }
         public ServiceProvider BuildServices { get; set; }
         public DIBuilder()
         {
@@ -16,11 +15,8 @@ namespace ZTP
                 .AddSingleton<IAdjacencyMatrix, AdjacencyMatrix>()
                 .AddSingleton<IDijkstra, Dijkstra>()
                 .AddSingleton<INearestFinder, NearestFinder>()
-                .BuildServiceProvider();
-
-            CoreServices = new ServiceCollection()
                 .AddSingleton<IParser, GraphParser>()
-                .AddSingleton<ITSP, TSP>(config => new TSP(BuildServices))
+                .AddSingleton<ITSP, TSP>()
                 .BuildServiceProvider();
         }
     }
