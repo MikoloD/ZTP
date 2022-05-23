@@ -12,11 +12,12 @@ namespace ZTP
         public DIBuilder()
         {
             BuildServices = new ServiceCollection()
-                .AddSingleton<IAdjacencyMatrix, AdjacencyMatrix>()
-                .AddSingleton<IDijkstra, Dijkstra>()
-                .AddSingleton<INearestFinder, NearestFinder>()
+                .AddScoped<IAdjacencyMatrix, AdjacencyMatrix>()
+                .AddScoped<IDijkstra, Dijkstra>()
+                .AddScoped<INearestFinder, NearestFinder>()
                 .AddSingleton<IParser, GraphParser>()
                 .AddSingleton<ITSP, TSP>()
+                .AddSingleton<IParallelTSP, ParallelTSP>()
                 .BuildServiceProvider();
         }
     }
