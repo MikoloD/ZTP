@@ -10,39 +10,42 @@ namespace ZTP
 {
     class TSP : ITSP
     {
-        private readonly ServiceProvider _serviceProvider;
+        private readonly IAdjacencyMatrix _adjacencyMatrix;
+        private readonly IDijkstra _dijkstra;
+        private readonly INearestFinder _nearestFinder;
         public List<int> AddedNodes { get; set; } = new List<int>();
-        public TSP(ServiceProvider serviceProvider)
+        public TSP(IAdjacencyMatrix adjacencyMatrix,IDijkstra dijkstra,INearestFinder nearestFinder)
         {
-            _serviceProvider = serviceProvider;
+
+            _adjacencyMatrix = adjacencyMatrix;
+            _dijkstra = dijkstra;
+            _nearestFinder = nearestFinder;
 
         }
         public Path Run(int StartNode,DotGraph<int> Graph)
         {
-            IAdjacencyMatrix AdjacencyMatrix = _serviceProvider.GetService<IAdjacencyMatrix>();
-            IDijkstra Dijkstra = _serviceProvider.GetService<IDijkstra>();
-            INearestFinder NearestFinder = _serviceProvider.GetService<INearestFinder>();
-
-            int index = 0;
+            int graphSize = Graph.Vertices.Count();
             Path result = new Path
             {
                 Value = 0,
-                Nodes = new int[Graph.Vertices.Count() + 1]
+                Nodes = new int[graphSize + 1]
             };
-            result.Nodes[index] = StartNode;
+            result.Nodes[0] = StartNode;
 
-            int[,] weightMatrix = AdjacencyMatrix.CreateAdjMatrix(Graph);
-            while (AddedNodes.Count() < Graph.Vertices.Count())
+            int[,] weightMatrix = _adjacencyMatrix.CreateAdjMatrix(Graph);
+            for (int i = 0; i < graphSize; i++)
             {
-                Dijkstra.Run(weightMatrix, StartNode);
-                var dijstraResult = Dijkstra.AlghoritmResult.Where(x => AddedNodes.All(y => y != x.TargetNodeId)).ToArray();
-                Path path = NearestFinder.Run(dijstraResult);
-                index++;
-                result.Nodes[index] = path.Nodes[1];
+                _dijkstra.Run(weightMatrix, StartNode);
+                var dijstraResult = _dijkstra.AlghoritmResult.Where(x => AddedNodes.All(y => y != x.TargetNodeId)).ToArray();
+                Path path = _nearestFinder.Run(dijstraResult);
+                result.Nodes[i+1] = path.Nodes[1];
                 result.Value += path.Value;
                 StartNode = path.Nodes[1];
                 AddedNodes.Add(path.Nodes[0]);
-            }
+            }        
+            _dijkstra.Run(weightMatrix, StartNode);
+            result.Nodes[graphSize] = result.Nodes[0];
+            result.Value += _dijkstra.AlghoritmResult[result.Nodes[0]].Value;
             return result;
         }
 
