@@ -10,10 +10,13 @@ namespace ZTP
         static void Main(string[] args)
         {
             string path = @"Data\graphDuzy.dt";
-            int startNode = 0;
+            int startNode;
+
+            startNode = int.Parse(Console.ReadLine());
+            Console.WriteLine();
 
             DIBuilder DIProvider  = new DIBuilder();
-            var serviceProvider = DIProvider.CoreServices;
+            var serviceProvider = DIProvider.BuildServices;
             DotGraph<int> Graf = serviceProvider.GetService<IParser>().Run(path);
             ITSP TravelingSalesmanProblem = serviceProvider.GetService<ITSP>();
             Path result = TravelingSalesmanProblem.Run(startNode,Graf);
@@ -22,20 +25,6 @@ namespace ZTP
                 Console.WriteLine(item);
             }
             Console.WriteLine("Wartość: "+ result.Value);
-            //IAdjacencyMatrix AdjacencyMatrix = serviceProvider.GetService<IAdjacencyMatrix>();
-            //IDijkstra Dijkstra = serviceProvider.GetService<IDijkstra>();
-
-            //Dijkstra.Run(AdjacencyMatrix.CreateAdjMatrix(Graf),startNode);
-
-            //foreach (var item in Dijkstra.AlghoritmResult)
-            //{
-            //    Console.Write(item.SourceNodeId+" "+item.TargetNodeId+" "+item.Value);
-            //    foreach (var elem in item.Path)
-            //    {
-            //        Console.Write(" "+elem);
-            //    }
-            //    Console.WriteLine();
-            //}
         }
     }
 }
