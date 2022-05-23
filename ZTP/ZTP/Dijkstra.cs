@@ -96,7 +96,7 @@ namespace ZTP
         {
             int nVertices = distances.Length;
 
-            for (int vertexIndex = 1;
+            for (int vertexIndex = 0;
                     vertexIndex < nVertices;
                     vertexIndex++)
             {
