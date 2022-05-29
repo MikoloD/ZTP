@@ -15,6 +15,7 @@ namespace ZTP
                 .AddScoped<IAdjacencyMatrix, AdjacencyMatrix>()
                 .AddScoped<IDijkstra, Dijkstra>()
                 .AddScoped<INearestFinder, NearestFinder>()
+                .AddScoped<IParallelNearestFinder, ParallelSafeNearestFinder>()
                 .AddSingleton<IParser, GraphParser>()
                 .AddSingleton<ITSP, TSP>()
                 .AddSingleton<IParallelTSP, ParallelTSP>()
