@@ -7,6 +7,6 @@ namespace ZTP.Interfaces
 {
     interface ITSP
     {
-        public Path Run(int StartNode, DotGraph<int> Graph);
+        public IPath Run(int StartNode, DotGraph<int> Graph);
     }
 }
