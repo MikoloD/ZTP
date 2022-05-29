@@ -11,18 +11,19 @@ namespace ZTP
         static void Test(ITSP TSP,int startNode, DotGraph<int> Graf)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
-            Path result = TSP.Run(startNode, Graf);
+            IPath result = TSP.Run(startNode, Graf);
             stopwatch.Stop();
             PrintSolution(result, stopwatch.Elapsed);
         }
-        static void PrintSolution(Path result,TimeSpan time)
+        static void PrintSolution(IPath result,TimeSpan time)
         {
             foreach (var item in result.Nodes)
             {
-                Console.WriteLine(item);
+                Console.Write(item+" ");
             }
             Console.WriteLine("Wartość: " + result.Value);
             Console.WriteLine("Czas: " + time);
+            Console.WriteLine();
         }
         static void Main(string[] args)
         {
@@ -40,9 +41,9 @@ namespace ZTP
             IParallelTSP ParallelNaiveTSP = serviceProvider.GetService<IParallelTSP>();
 
 
-            Test(NaiveTSP, startNode, Graf);
+            //Test(NaiveTSP, startNode, Graf);
             //Work in progress
-            //Test(ParallelNaiveTSP, startNode, Graf);
+            Test(ParallelNaiveTSP, startNode, Graf);
         }
     }
 }
