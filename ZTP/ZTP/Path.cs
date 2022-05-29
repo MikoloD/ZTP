@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZTP.Interfaces;
 
 namespace ZTP
 {
-    public class Path
+    public class Path : IPath
     {
-        public int[] Nodes { get; set; }
+        public IEnumerable<int> Nodes { get; set; } = new List<int>();
         public long Value { get; set; }
     }
 }
