@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZTP.Interfaces;
+using ZTP.Handlers.Interfaces;
 
 namespace ZTP.Handlers
 {

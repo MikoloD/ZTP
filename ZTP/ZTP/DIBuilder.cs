@@ -3,9 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using ZTP.Dijsktra;
+using ZTP.Dijsktra.Interfaces;
 using ZTP.Interfaces;
 using ZTP.ParallelTSPAlghoritms;
+using ZTP.ParallelTSPAlghoritms.Interfaces;
 using ZTP.TSPAlghoritms;
+using ZTP.TSPAlghoritms.Interfaces;
 
 namespace ZTP
 {

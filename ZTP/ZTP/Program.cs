@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Diagnostics;
 using ZTP.Interfaces;
+using ZTP.ParallelTSPAlghoritms.Interfaces;
+using ZTP.TSPAlghoritms.Interfaces;
 
 namespace ZTP
 {
@@ -35,6 +37,7 @@ namespace ZTP
 
             DIBuilder DIProvider  = new DIBuilder();
             var serviceProvider = DIProvider.BuildServices;
+
             DotGraph<int> Graf = serviceProvider.GetService<IParser>().Run(path);
 
             ITSP NaiveTSP = serviceProvider.GetService<ITSP>();

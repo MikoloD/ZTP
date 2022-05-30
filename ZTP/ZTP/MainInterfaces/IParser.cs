@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ZTP.Interfaces
 {
-    interface IParser
+    public interface IParser
     {
         public DotGraph<int> Run(string path);
     }

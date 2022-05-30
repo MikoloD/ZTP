@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using ZTP.Dijsktra.Interfaces;
 using ZTP.Interfaces;
+using ZTP.ParallelTSPAlghoritms.Interfaces;
+using ZTP.TSPAlghoritms.Interfaces;
 
 namespace ZTP.ParallelTSPAlghoritms
 {
