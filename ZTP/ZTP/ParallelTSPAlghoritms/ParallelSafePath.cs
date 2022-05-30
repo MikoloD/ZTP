@@ -27,15 +27,11 @@ namespace ZTP.ParallelTSPAlghoritms
                 }
             }
         }
-        public IEnumerable<int> Nodes { get; set; } = new ConcurrentBag<int>();
+        public List<int> Nodes { get; set; } = new List<int>();
+        public ConcurrentBag<Node> Vercites { get; set; } = new ConcurrentBag<Node>();
 
         public ParallelSafePath()
         {
-
-        }
-        public ParallelSafePath(object valueLock)
-        {
-            _valueLock = valueLock;
 
         }
     }
