@@ -1,16 +1,32 @@
-﻿using System;
+﻿using Graphviz4Net.Dot;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Text;
+using ZTP.Handlers.Interfaces;
+using ZTP.Interfaces;
+using ZTP.TSPAlghoritms.Interfaces;
 
 namespace ZTP.Handlers
 {
-    class SmallGraphHandler : AbstractHandler
+    public class SmallGraphHandler : AbstractHandler, ISmallGraphHandler
     {
-        public override object Handle(object request)
+        private readonly IParser _parser;
+        private readonly ITSP _tsp;
+        public SmallGraphHandler(IParser parser,ITSP tsp)
         {
-            if ((request as string) == "Banana")
+            _parser = parser;
+            _tsp = tsp;
+        }
+        public override object Handle(GraphRequest request)
+        {
+            DotGraph<int> graph = _parser.Run(request.Path);
+            if (graph.Edges.Count() * graph.Vertices.Count() <= 4*Math.Pow(10,6)) 
             {
-                return $"Monkey: I'll eat the {request.ToString()}.\n";
+                RunHandling handling = new RunHandling(_tsp,request.StartingNode,graph);
+                handling.Message = $"SmallGraphHandler was used";
+                return handling.Message;
             }
             else
             {
