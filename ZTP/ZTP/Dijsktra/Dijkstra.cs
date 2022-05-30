@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ZTP
+namespace ZTP.Dijsktra
 {
     public class Dijkstra : IDijkstra
     {
@@ -77,8 +77,8 @@ namespace ZTP
                     int edgeDistance = adjacencyMatrix[nearestVertex, vertexIndex];
 
                     if (edgeDistance > 0
-                        && ((shortestDistance + edgeDistance) <
-                            shortestDistances[vertexIndex]))
+                        && shortestDistance + edgeDistance <
+                            shortestDistances[vertexIndex])
                     {
                         parents[vertexIndex] = nearestVertex;
                         shortestDistances[vertexIndex] = shortestDistance +

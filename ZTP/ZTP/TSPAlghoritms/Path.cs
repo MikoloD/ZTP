@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using ZTP.Interfaces;
 
-namespace ZTP
+namespace ZTP.TSPAlghoritms
 {
     public class Path : IPath
     {

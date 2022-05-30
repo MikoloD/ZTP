@@ -1,17 +1,17 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ZTP.Dijsktra;
 using ZTP.Interfaces;
 
-namespace ZTP
+namespace ZTP.TSPAlghoritms
 {
-    public class ParallelSafeNearestFinder : IParallelNearestFinder
+    public class NearestFinder : INearestFinder
     {
-        public ParallelSafePath Run(DijkstraResult[] dijkstraResults)
+        public Path Run(DijkstraResult[] dijkstraResults)
         {
-            ParallelSafePath edge = new ParallelSafePath
+            Path edge = new Path
             {
                 Value = int.MaxValue
             };
@@ -20,11 +20,11 @@ namespace ZTP
                 if (edge.Value > dijkstraResults[i].Value && dijkstraResults[i].Value > 0)
                 {
                     edge.Value = dijkstraResults[i].Value;
-                    ((ConcurrentBag<int>)edge.Nodes).Add(dijkstraResults[i].SourceNodeId);
-                    ((ConcurrentBag<int>)edge.Nodes).Add(dijkstraResults[i].TargetNodeId);
+                    ((List<int>)edge.Nodes).Add(dijkstraResults[i].SourceNodeId);
+                    ((List<int>)edge.Nodes).Add(dijkstraResults[i].TargetNodeId);
                 }
             }
-            edge.Nodes = edge.Nodes.Take(2);
+            edge.Nodes = edge.Nodes.Reverse().Take(2).Reverse();
             return edge;
         }
     }

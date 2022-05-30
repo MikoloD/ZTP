@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using ZTP.Interfaces;
 
-namespace ZTP
+namespace ZTP.TSPAlghoritms
 {
     class TSP : ITSP
     {
@@ -14,7 +14,7 @@ namespace ZTP
         private readonly IDijkstra _dijkstra;
         private readonly INearestFinder _nearestFinder;
         public List<int> AddedNodes { get; set; } = new List<int>();
-        public TSP(IAdjacencyMatrix adjacencyMatrix,IDijkstra dijkstra,INearestFinder nearestFinder)
+        public TSP(IAdjacencyMatrix adjacencyMatrix, IDijkstra dijkstra, INearestFinder nearestFinder)
         {
 
             _adjacencyMatrix = adjacencyMatrix;
@@ -25,7 +25,7 @@ namespace ZTP
 
         IPath ITSP.Run(int StartNode, DotGraph<int> Graph)
         {
-            int graphSize = Graph.Vertices.Count()-1;
+            int graphSize = Graph.Vertices.Count() - 1;
             Path result = new Path
             {
                 Value = 0,

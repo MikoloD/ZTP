@@ -2,7 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ZTP.Dijsktra;
 using ZTP.Interfaces;
+using ZTP.ParallelTSPAlghoritms;
+using ZTP.TSPAlghoritms;
 
 namespace ZTP
 {

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ZTP.Interfaces;
 
-namespace ZTP
+namespace ZTP.ParallelTSPAlghoritms
 {
     class ParallelTSP : IParallelTSP
     {
@@ -26,7 +26,7 @@ namespace ZTP
         }
         IPath ITSP.Run(int StartNode, DotGraph<int> Graph)
         {
-            int graphSize = Graph.Vertices.Count()-1;
+            int graphSize = Graph.Vertices.Count() - 1;
             ParallelSafePath result = new ParallelSafePath
             {
                 Value = 0
@@ -35,7 +35,7 @@ namespace ZTP
             int[,] weightMatrix = _adjacencyMatrix.CreateAdjMatrix(Graph);
             object loopLock = new object();
             Parallel.For(0, graphSize, i =>
-            {              
+            {
                 lock (loopLock)
                 {
                     ParallelSafePath path = new ParallelSafePath(loopLock);
@@ -54,7 +54,7 @@ namespace ZTP
                     result.Value += path.Value;
                     AddedNodes.Add(sorceNode);
                     StartNode = targetNode;
-                }               
+                }
             });
             _dijkstra.Run(weightMatrix, StartNode);
             int startingNode = result.Nodes.LastOrDefault();

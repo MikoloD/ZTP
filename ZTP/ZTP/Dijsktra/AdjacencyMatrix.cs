@@ -5,14 +5,14 @@ using System.Text;
 using System.Linq;
 using ZTP.Interfaces;
 
-namespace ZTP
+namespace ZTP.Dijsktra
 {
     public class AdjacencyMatrix : IAdjacencyMatrix
     {
         public int[,] CreateAdjMatrix(DotGraph<int> Graph)
         {
             int size = Graph.Vertices.Count();
-            int[,] adjMatrix = new int[size,size];
+            int[,] adjMatrix = new int[size, size];
             foreach (var item in Graph.VerticesEdges)
             {
                 int x = item.Source.Id;
