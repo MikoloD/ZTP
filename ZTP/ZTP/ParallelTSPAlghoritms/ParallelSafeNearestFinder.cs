@@ -21,11 +21,17 @@ namespace ZTP.ParallelTSPAlghoritms
                 if (edge.Value > dijkstraResults[i].Value && dijkstraResults[i].Value > 0)
                 {
                     edge.Value = dijkstraResults[i].Value;
-                    ((ConcurrentBag<int>)edge.Nodes).Add(dijkstraResults[i].SourceNodeId);
-                    ((ConcurrentBag<int>)edge.Nodes).Add(dijkstraResults[i].TargetNodeId);
+
+                    edge.Vercites.Add(new Node(dijkstraResults[i].SourceNodeId, i + 1));
+                    edge.Vercites.Add(new Node(dijkstraResults[i].TargetNodeId, i));
                 }
             }
-            edge.Nodes = edge.Nodes.Take(2);
+            var query = edge.Vercites.OrderByDescending(x => x.Order).Take(2).ToList();
+            edge.Vercites.Clear();
+            foreach (var item in query)
+            {
+                edge.Vercites.Add(item);
+            }
             return edge;
         }
     }
