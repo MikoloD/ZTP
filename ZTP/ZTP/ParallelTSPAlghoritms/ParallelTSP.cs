@@ -26,40 +26,39 @@ namespace ZTP.ParallelTSPAlghoritms
         }
         IPath ITSP.Run(int StartNode, DotGraph<int> Graph)
         {
-            int graphSize = Graph.Vertices.Count() - 1;
+            int graphSize = Graph.Vertices.Count();
             ParallelSafePath result = new ParallelSafePath
             {
                 Value = 0
             };
-            ((ConcurrentBag<int>)result.Nodes).Add(StartNode);
+            int startingPosition = StartNode;
+            result.Vercites.Add(new Node(StartNode, 0));
             int[,] weightMatrix = _adjacencyMatrix.CreateAdjMatrix(Graph);
             object loopLock = new object();
-            Parallel.For(0, graphSize, i =>
+            Node sorceNode = new Node();
+            Node targetNode = new Node();
+            ParallelSafePath path = new ParallelSafePath();
+            Parallel.For(1, graphSize, i =>
             {
                 lock (loopLock)
                 {
-                    ParallelSafePath path = new ParallelSafePath(loopLock);
                     _dijkstra.Run(weightMatrix, StartNode);
                     var dijstraResult = _dijkstra.AlghoritmResult.Where(x => AddedNodes.All(y => y != x.TargetNodeId)).ToArray();
                     path = _nearestFinder.Run(dijstraResult);
-                    var query = path.Nodes;
-                    ConcurrentBag<int> road = new ConcurrentBag<int>();
-                    foreach (var item in query)
-                    {
-                        road.Add(item);
-                    }
-                    int sorceNode = road.FirstOrDefault();
-                    int targetNode = road.LastOrDefault();
-                    ((ConcurrentBag<int>)result.Nodes).Add(targetNode);
-                    result.Value += path.Value;
-                    AddedNodes.Add(sorceNode);
-                    StartNode = targetNode;
+                    sorceNode = path.Vercites.OrderByDescending(x => x.Order).FirstOrDefault();
+                    targetNode = path.Vercites.OrderByDescending(x => x.Order).LastOrDefault();
+                    sorceNode.Order = i;
+                    targetNode.Order = i;
+                    StartNode = targetNode.Name;
                 }
+                result.Vercites.Add(targetNode);
+                result.Value += path.Value;
+                AddedNodes.Add(sorceNode.Name);
             });
             _dijkstra.Run(weightMatrix, StartNode);
-            int startingNode = result.Nodes.LastOrDefault();
-            ((ConcurrentBag<int>)result.Nodes).Add(startingNode);
-            result.Value += _dijkstra.AlghoritmResult[startingNode].Value;
+            result.Vercites.Add(new Node(startingPosition, graphSize + 1));
+            result.Value += _dijkstra.AlghoritmResult[startingPosition].Value;
+            result.Nodes = result.Vercites.OrderBy(x => x.Order).Select(x => x.Name).ToList();
             return result;
         }
     }
