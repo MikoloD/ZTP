@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using ZTP.Dijsktra;
 
-namespace ZTP
+namespace ZTP.Dijsktra.Interfaces
 {
     public interface IDijkstra
     {

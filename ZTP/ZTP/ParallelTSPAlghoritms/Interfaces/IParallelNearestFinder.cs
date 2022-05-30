@@ -4,7 +4,7 @@ using System.Text;
 using ZTP.Dijsktra;
 using ZTP.ParallelTSPAlghoritms;
 
-namespace ZTP.Interfaces
+namespace ZTP.ParallelTSPAlghoritms.Interfaces
 {
     public interface IParallelNearestFinder
     {

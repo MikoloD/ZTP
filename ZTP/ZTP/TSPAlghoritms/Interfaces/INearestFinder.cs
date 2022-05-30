@@ -4,7 +4,7 @@ using System.Text;
 using ZTP.Dijsktra;
 using ZTP.TSPAlghoritms;
 
-namespace ZTP.Interfaces
+namespace ZTP.TSPAlghoritms.Interfaces
 {
     public interface INearestFinder
     {

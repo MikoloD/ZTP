@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZTP.Interfaces
+namespace ZTP.Dijsktra.Interfaces
 {
-    interface IAdjacencyMatrix
+    public interface IAdjacencyMatrix
     {
         public int[,] CreateAdjMatrix(DotGraph<int> Graph);
     }
