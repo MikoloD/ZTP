@@ -23,7 +23,7 @@ namespace ZTP
                 new GraphRequest()
                 {
                     Path= @"Data\graphDuzy.dt",
-                    StartingNode= 14
+                    StartingNode= 100
                 }
             };
 
@@ -32,7 +32,7 @@ namespace ZTP
             IHandlerBuilder chainOfResposibility = serviceProvider.GetService<IHandlerBuilder>();
             foreach (var item in requests)
             {
-                chainOfResposibility.Handle(item);
+                Console.WriteLine(chainOfResposibility.Handle(item));
             }
 
             //DotGraph<int> Graf = serviceProvider.GetService<IParser>().Run(path);

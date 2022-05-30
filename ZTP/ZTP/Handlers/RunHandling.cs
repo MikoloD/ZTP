@@ -20,13 +20,14 @@ namespace ZTP.Handlers
         }
         public void PrintSolution(IPath result, TimeSpan time)
         {
+            Console.WriteLine();
             foreach (var item in result.Nodes)
             {
                 Console.Write(item + " ");
             }
+            Console.WriteLine();
             Console.WriteLine("Wartość: " + result.Value);
             Console.WriteLine("Czas: " + time);
-            Console.WriteLine();
         }
     }
 }

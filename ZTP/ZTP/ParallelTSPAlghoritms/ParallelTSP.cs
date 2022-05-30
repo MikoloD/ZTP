@@ -17,7 +17,7 @@ namespace ZTP.ParallelTSPAlghoritms
         private readonly IAdjacencyMatrix _adjacencyMatrix;
         private readonly IDijkstra _dijkstra;
         private readonly IParallelNearestFinder _nearestFinder;
-        public ConcurrentBag<int> AddedNodes { get; set; } = new ConcurrentBag<int>();
+        public ConcurrentBag<int> AddedNodes { get; set; }
         public ParallelTSP(IAdjacencyMatrix adjacencyMatrix, IDijkstra dijkstra, IParallelNearestFinder nearestFinder)
         {
 
