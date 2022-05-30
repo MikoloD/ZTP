@@ -40,9 +40,7 @@ namespace ZTP
             ITSP NaiveTSP = serviceProvider.GetService<ITSP>();
             IParallelTSP ParallelNaiveTSP = serviceProvider.GetService<IParallelTSP>();
 
-
-            //Test(NaiveTSP, startNode, Graf);
-            //Work in progress
+            Test(NaiveTSP, startNode, Graf);
             Test(ParallelNaiveTSP, startNode, Graf);
         }
     }
