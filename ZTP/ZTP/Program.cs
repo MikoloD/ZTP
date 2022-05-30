@@ -1,50 +1,47 @@
 ﻿using Graphviz4Net.Dot;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using ZTP.Handlers.Interfaces;
 using ZTP.Interfaces;
-using ZTP.ParallelTSPAlghoritms.Interfaces;
 using ZTP.TSPAlghoritms.Interfaces;
 
 namespace ZTP
 {
     internal class Program
     {
-        static void Test(ITSP TSP,int startNode, DotGraph<int> Graf)
-        {
-            Stopwatch stopwatch = Stopwatch.StartNew();
-            IPath result = TSP.Run(startNode, Graf);
-            stopwatch.Stop();
-            PrintSolution(result, stopwatch.Elapsed);
-        }
-        static void PrintSolution(IPath result,TimeSpan time)
-        {
-            foreach (var item in result.Nodes)
-            {
-                Console.Write(item+" ");
-            }
-            Console.WriteLine("Wartość: " + result.Value);
-            Console.WriteLine("Czas: " + time);
-            Console.WriteLine();
-        }
         static void Main(string[] args)
         {
-            string path = @"Data\graphDuzy.dt";
-            int startNode;
-
-            startNode = int.Parse(Console.ReadLine());
-            Console.WriteLine();
+            List<GraphRequest> requests = new List<GraphRequest>()
+            {
+                new GraphRequest()
+                {
+                    Path= @"Data\graphDuzy.dt",
+                    StartingNode= 12
+                },
+                new GraphRequest()
+                {
+                    Path= @"Data\graphDuzy.dt",
+                    StartingNode= 14
+                }
+            };
 
             DIBuilder DIProvider  = new DIBuilder();
-            var serviceProvider = DIProvider.BuildServices;
+            ServiceProvider serviceProvider = DIProvider.BuildServices;
+            IHandlerBuilder chainOfResposibility = serviceProvider.GetService<IHandlerBuilder>();
+            foreach (var item in requests)
+            {
+                chainOfResposibility.Handle(item);
+            }
 
-            DotGraph<int> Graf = serviceProvider.GetService<IParser>().Run(path);
+            //DotGraph<int> Graf = serviceProvider.GetService<IParser>().Run(path);
 
-            ITSP NaiveTSP = serviceProvider.GetService<ITSP>();
-            IParallelTSP ParallelNaiveTSP = serviceProvider.GetService<IParallelTSP>();
+            //ITSP NaiveTSP = serviceProvider.GetService<ITSP>();
+            //IParallelTSP ParallelNaiveTSP = serviceProvider.GetService<IParallelTSP>();
 
-            Test(NaiveTSP, startNode, Graf);
-            Test(ParallelNaiveTSP, startNode, Graf);
+            //Test(NaiveTSP, startNode, Graf);
+            //Test(ParallelNaiveTSP, startNode, Graf);
         }
     }
 }
