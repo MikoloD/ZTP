@@ -20,11 +20,11 @@ namespace ZTP.TSPAlghoritms
                 if (edge.Value > dijkstraResults[i].Value && dijkstraResults[i].Value > 0)
                 {
                     edge.Value = dijkstraResults[i].Value;
-                    ((List<int>)edge.Nodes).Add(dijkstraResults[i].SourceNodeId);
-                    ((List<int>)edge.Nodes).Add(dijkstraResults[i].TargetNodeId);
+                    edge.Nodes.Clear();
+                    edge.Nodes.Add(dijkstraResults[i].SourceNodeId);
+                    edge.Nodes.Add(dijkstraResults[i].TargetNodeId);
                 }
             }
-            edge.Nodes = edge.Nodes.Reverse().Take(2).Reverse();
             return edge;
         }
     }
