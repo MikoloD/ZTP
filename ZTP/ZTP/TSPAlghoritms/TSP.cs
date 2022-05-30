@@ -30,7 +30,7 @@ namespace ZTP.TSPAlghoritms
             {
                 Value = 0,
             };
-            ((List<int>)result.Nodes).Add(StartNode);
+            result.Nodes.Add(StartNode);
 
             int[,] weightMatrix = _adjacencyMatrix.CreateAdjMatrix(Graph);
             for (int i = 0; i < graphSize; i++)
@@ -41,30 +41,15 @@ namespace ZTP.TSPAlghoritms
 
                 int sorceNode = path.Nodes.FirstOrDefault();
                 int targetNode = path.Nodes.LastOrDefault();
-                ((List<int>)result.Nodes).Add(targetNode);
+                result.Nodes.Add(targetNode);
                 result.Value += path.Value;
                 StartNode = targetNode;
                 AddedNodes.Add(sorceNode);
             }
             _dijkstra.Run(weightMatrix, StartNode);
-            ((List<int>)result.Nodes).Add(result.Nodes.FirstOrDefault());
+            result.Nodes.Add(result.Nodes.FirstOrDefault());
             result.Value += _dijkstra.AlghoritmResult[result.Nodes.FirstOrDefault()].Value;
             return result;
         }
-
-        //public Path Run()
-        //{
-        //    Path path = new Path
-        //    {
-        //        Value = 0,
-        //        Nodes = new int[dijkstraResults.Length]
-        //    };
-        //    while(dijkstraResults.Length > 0)
-        //    {
-        //        Path result = FindNearest(dijkstraResults);
-        //        path.Value += result.Value;
-
-        //    }
-        //}
     }
 }
