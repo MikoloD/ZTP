@@ -6,7 +6,7 @@ using ZTP.Interfaces;
 
 namespace ZTP.TSPAlghoritms.Interfaces
 {
-    interface ITSP
+    public interface ITSP
     {
         public IPath Run(int StartNode, DotGraph<int> Graph);
     }
