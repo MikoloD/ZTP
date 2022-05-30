@@ -5,7 +5,7 @@ using ZTP.Handlers.Interfaces;
 
 namespace ZTP.Handlers
 {
-    abstract class AbstractHandler : IHandler
+    public abstract class AbstractHandler : IHandler
     {
         private IHandler _nextHandler;
 
@@ -16,7 +16,7 @@ namespace ZTP.Handlers
             return handler;
         }
 
-        public virtual object Handle(object request)
+        public virtual object Handle(GraphRequest request)
         {
             if (this._nextHandler != null)
             {
