@@ -15,7 +15,7 @@ namespace ZTP.TSPAlghoritms
         private readonly IAdjacencyMatrix _adjacencyMatrix;
         private readonly IDijkstra _dijkstra;
         private readonly INearestFinder _nearestFinder;
-        public List<int> AddedNodes { get; set; } = new List<int>();
+        public List<int> AddedNodes { get; set; }
         public TSP(IAdjacencyMatrix adjacencyMatrix, IDijkstra dijkstra, INearestFinder nearestFinder)
         {
 
@@ -28,6 +28,7 @@ namespace ZTP.TSPAlghoritms
         IPath ITSP.Run(int StartNode, DotGraph<int> Graph)
         {
             int graphSize = Graph.Vertices.Count() - 1;
+            AddedNodes = new List<int>();
             Path result = new Path
             {
                 Value = 0,
