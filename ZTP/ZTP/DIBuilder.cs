@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Text;
 using ZTP.Dijsktra;
 using ZTP.Dijsktra.Interfaces;
+using ZTP.Handlers;
+using ZTP.Handlers.Interfaces;
 using ZTP.Interfaces;
 using ZTP.ParallelTSPAlghoritms;
 using ZTP.ParallelTSPAlghoritms.Interfaces;
@@ -22,9 +24,12 @@ namespace ZTP
                 .AddScoped<IDijkstra, Dijkstra>()
                 .AddScoped<INearestFinder, NearestFinder>()
                 .AddScoped<IParallelNearestFinder, ParallelSafeNearestFinder>()
-                .AddSingleton<IParser, GraphParser>()
-                .AddSingleton<ITSP, TSP>()
-                .AddSingleton<IParallelTSP, ParallelTSP>()
+                .AddScoped<IParser, GraphParser>()
+                .AddScoped<ITSP, TSP>()
+                .AddScoped<IParallelTSP, ParallelTSP>()
+                .AddSingleton<IHandlerBuilder, HandlerBuilder>()
+                .AddScoped<ISmallGraphHandler, SmallGraphHandler>()
+                .AddScoped<IHugeGraphHandler, HugeGraphHandler>()
                 .BuildServiceProvider();
         }
     }
