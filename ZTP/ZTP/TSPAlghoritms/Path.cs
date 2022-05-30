@@ -7,7 +7,7 @@ namespace ZTP.TSPAlghoritms
 {
     public class Path : IPath
     {
-        public IEnumerable<int> Nodes { get; set; } = new List<int>();
+        public List<int> Nodes { get; set; } = new List<int>();
         public long Value { get; set; }
     }
 }
