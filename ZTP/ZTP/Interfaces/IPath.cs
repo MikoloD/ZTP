@@ -6,7 +6,7 @@ namespace ZTP.Interfaces
 {
     public  interface IPath
     {
-        public IEnumerable<int> Nodes { get; set; }
+        public List<int> Nodes { get; set; }
         public long Value { get; set; }
     }
 }
