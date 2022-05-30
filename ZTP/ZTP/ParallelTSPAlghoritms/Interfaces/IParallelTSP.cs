@@ -5,7 +5,7 @@ using ZTP.TSPAlghoritms.Interfaces;
 
 namespace ZTP.ParallelTSPAlghoritms.Interfaces
 {
-    internal interface IParallelTSP : ITSP
+    public interface IParallelTSP : ITSP
     {
     }
 }
