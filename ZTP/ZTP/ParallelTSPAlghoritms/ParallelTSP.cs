@@ -18,7 +18,6 @@ namespace ZTP.ParallelTSPAlghoritms
         private readonly IDijkstra _dijkstra;
         private readonly IParallelNearestFinder _nearestFinder;
         public ConcurrentBag<int> AddedNodes { get; set; } = new ConcurrentBag<int>();
-        public ConcurrentBag<ConcurrentBag<int>> WeightMatrix { get; set; } = new ConcurrentBag<ConcurrentBag<int>>();
         public ParallelTSP(IAdjacencyMatrix adjacencyMatrix, IDijkstra dijkstra, IParallelNearestFinder nearestFinder)
         {
 
@@ -29,6 +28,7 @@ namespace ZTP.ParallelTSPAlghoritms
         }
         IPath ITSP.Run(int StartNode, DotGraph<int> Graph)
         {
+            AddedNodes = new ConcurrentBag<int>();
             int graphSize = Graph.Vertices.Count();
             ParallelSafePath result = new ParallelSafePath
             {
