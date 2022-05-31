@@ -7,7 +7,7 @@ using System.IO;
 using System.Text;
 using ZTP.Interfaces;
 
-namespace ZTP
+namespace ZTP.Parser
 {
     public class GraphParser : IParser
     {
