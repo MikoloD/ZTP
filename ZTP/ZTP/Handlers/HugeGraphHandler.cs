@@ -23,8 +23,10 @@ namespace ZTP.Handlers
             DotGraph<int> graph = _parser.Run(request.Path);
             if (graph.Edges.Count() * graph.Vertices.Count() > 4 * Math.Pow(10, 6))
             {
-                RunHandling handling = new RunHandling(_tsp, request.StartingNode, graph);
-                handling.Message = $"HugeGraphHandler was used";
+                RunHandling handling = new RunHandling(_tsp, request.StartingNode, graph)
+                {
+                    Message = $"HugeGraphHandler was used"
+                };
                 return handling.Message;
             }
             else
