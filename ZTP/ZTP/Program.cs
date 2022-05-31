@@ -34,14 +34,6 @@ namespace ZTP
             {
                 Console.WriteLine(chainOfResposibility.Handle(item));
             }
-
-            //DotGraph<int> Graf = serviceProvider.GetService<IParser>().Run(path);
-
-            //ITSP NaiveTSP = serviceProvider.GetService<ITSP>();
-            //IParallelTSP ParallelNaiveTSP = serviceProvider.GetService<IParallelTSP>();
-
-            //Test(NaiveTSP, startNode, Graf);
-            //Test(ParallelNaiveTSP, startNode, Graf);
         }
     }
 }
