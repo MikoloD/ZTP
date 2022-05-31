@@ -7,9 +7,10 @@ namespace ZTP.Handlers
 {
     public class HandlerBuilder : AbstractHandler,IHandlerBuilder
     {
-        public HandlerBuilder(ISmallGraphHandler smallGraphHandler)
+        public HandlerBuilder(ISmallGraphHandler smallGraphHandler,IHugeGraphHandler hugeGraphHandler)
         {
             this.SetNext(smallGraphHandler);
+            this.SetNext(hugeGraphHandler);
 
         }
     }
