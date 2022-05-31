@@ -9,8 +9,7 @@ namespace ZTP.Handlers
     {
         public HandlerBuilder(ISmallGraphHandler smallGraphHandler,IHugeGraphHandler hugeGraphHandler)
         {
-            this.SetNext(smallGraphHandler);
-            this.SetNext(hugeGraphHandler);
+            this.SetNext(smallGraphHandler).SetNext(hugeGraphHandler);
 
         }
     }
