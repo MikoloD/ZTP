@@ -24,6 +24,16 @@ namespace ZTP
                 {
                     Path= @"Data\graphDuzy.dt",
                     StartingNode= 100
+                },
+                new GraphRequest()
+                {
+                    Path= @"Data\graf1000.gv",
+                    StartingNode= 10
+                },
+                new GraphRequest()
+                {
+                    Path= @"Data\graf1000.gv",
+                    StartingNode= 100
                 }
             };
 

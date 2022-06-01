@@ -11,6 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Data\graf1000.gv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Data\graphDuzy.dt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
